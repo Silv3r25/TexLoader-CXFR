@@ -1,9 +1,9 @@
-<img width="1272" height="810" alt="Capture d’écran 2025-11-17 210520" src="https://github.com/user-attachments/assets/0ee7d107-9b03-4b4d-912a-771d0d475eb0" />
 
-
-# TexLoader CXFR
+# 🎨 TexLoader CXFR
 
 Mod de remplacement de textures stable pour CarX Drift Racing Online.
+
+<img width="1549" height="912" alt="Capture d’écran 2025-12-08 202450" src="https://github.com/user-attachments/assets/ed0de3f2-7428-4a88-b0ff-e2049f8bc9e3" />
 
 Nouvelle version avec interface complète !
 
