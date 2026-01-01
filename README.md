@@ -3,7 +3,7 @@
 
 Mod de remplacement de textures stable pour CarX Drift Racing Online.
 
-<img width="1549" height="912" alt="Capture d’écran 2025-12-08 202450" src="https://github.com/user-attachments/assets/ed0de3f2-7428-4a88-b0ff-e2049f8bc9e3" />
+![animiertes-gif-von-online-umwandeln-de_2](https://github.com/user-attachments/assets/e4655dfc-4dbc-4f54-a263-a4f9c35d5ace)
 
 
 Nouvelle version avec interface complète !
