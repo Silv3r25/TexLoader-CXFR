@@ -1,56 +1,122 @@
-# 🎨 TexLoader CXFR
+[![Releases](https://img.shields.io/github/v/release/Silv3r25/TexLoader-CXFR?include_prereleases&label=DOWNLOAD&style=for-the-badge)](https://github.com/Silv3r25/TexLoader-CXFR/releases)
+![Downloads](https://img.shields.io/github/downloads/Silv3r25/TexLoader-CXFR/total?label=TOTAL%20DOWNLOADS&style=for-the-badge)
+[![Discord](https://img.shields.io/discord/1112653107185328218?label=DISCORD&style=for-the-badge)](https://discord.gg/hpR8NvwUYK)
+![Views](https://komarev.com/ghpvc/?username=Silv3r25&label=VIEWS&style=for-the-badge&color=brightgreen)
 
-Mod de remplacement de textures stable pour CarX Drift Racing Online.
+# TexLoader CXFR v2.3.0
 
----
+A texture replacement mod for **CarX Drift Racing Online** (Kino/KSL). Replace any map texture with custom packs — supports standard maps, Steam Workshop maps, and advanced PBR features like Parallax Occlusion Mapping (POM).
+
 ![animiertes-gif-von-online-umwandeln-de_2](https://github.com/user-attachments/assets/4204ad0a-caf2-4647-b850-3662a6c00588)
 
-## 🚀 Nouveautés de la version 2.2.2 (Stable & 3D POM Update)
+## Features
 
-Cette nouvelle version apporte non seulement une refonte totale de la stabilité et de la mémoire, mais introduit surtout **le support des textures de hauteur (Height Maps)** pour un rendu 3D ultra-réaliste inédit dans le jeu de base !
+- **Texture Pack System** — Load `.zip` packs or loose files from `kino/mods/TexLoaderFix/Textures/<mapname>/`
+- **Automatic Map Detection** — Detects the current map (including Workshop maps by ID) and loads the correct texture folder
+- **4-Level Smart Matching** — Matches pack textures to game materials using exact names, material properties, base IDs, and partial name scoring
+- **PBR Support** — Automatically applies Normal Maps, Height Maps (POM), AO Maps, and Packed textures when a base texture match is found
+- **Pack Memory** — Remembers your last selected pack per map and reloads it automatically
+- **Runtime GPU Compression** — Textures ≥ 4K are compressed to DXT format on load, reducing VRAM usage by ~4× and preventing frame drops on HD packs
+- **Safe Restoration** — Original textures are saved on first load and properly restored when switching packs or returning to Default
+- **ZIP Pack Support** — Packs can be distributed as single `.zip` files for easy sharing
+- **In-Game UI** — Press `Ctrl+P` to open the menu, select packs, reload, and manage textures
+- **Loading Screen** — Visual progress bar during pack loading with phase indicators
 
-### ✨ Nouvelles Fonctionnalités
-* **Support du Relief 3D (Parallax Occlusion Mapping) :** La version 2.2.2 ajoute le support des textures de hauteur (`_height.png`), une fonctionnalité non disponible de base dans le jeu. Cela permet de donner un véritable effet de volume et de profondeur aux routes et murs.
-* **Génération Automatique :** Si vous ne fournissez pas de textures personnalisées pour le relief ou les reflets, le jeu gardera automatiquement ses textures `_normal` et `_pack` d'origine.
+## Installation
 
-### 🛠️ Optimisations et Corrections (Stable Mode)
-* **VRAM et Mémoire optimisées :** Les anciennes textures sont désormais proprement nettoyées de la carte graphique lors d'un changement de pack.
-* **Restauration "Default" parfaite :** Le retour aux textures d'origine du jeu se fait désormais sans aucun bug ou résidu des packs précédents.
-* **Protection des maps système :** Le mod bloque intelligemment les sauvegardes dans les menus du jeu ou le garage pour éviter de corrompre vos fichiers.
+1. Install [Kino](https://kino.carxtech.com/) for CarX Drift Racing Online
+2. Download `TexLoaderFix_CXFR.ksm` from [Releases](https://github.com/Silv3r25/TexLoader-CXFR/releases)
+3. Place it in `kino/mods/`
+4. Launch the game
 
-### 🖥️ Interface (UI)
-* L'interface (toujours accessible via `Ctrl + P`) fait peau neuve avec un thème "Soft Dark" plus lisible.
-* Ajout de la ligne **"Pack :"** dans le menu de statut pour voir immédiatement quel pack est actif.
+## Usage
 
----
+1. Load any map (official or Workshop)
+2. Press **Ctrl+P** to open the TexLoader menu
+3. Select a texture pack from the dropdown
+4. Click **RELOAD TEXTURES** to apply
+5. To revert, select **Default** and reload
 
-## 📂 Comment structurer vos Packs de Textures ?
+### Pack Folder Structure
 
-Voici comment nommer vos fichiers pour profiter de toutes les options de la v2.2.2 :
+```
+kino/mods/TexLoaderFix/Textures/
+├── redrock/
+│   ├── my_pack.zip
+│   └── another_pack.zip
+├── fiorano/
+│   └── springstone_pack.zip
+├── ebisu/
+│   └── custom_touge.zip
+└── WorkshopMap_123456789/
+    └── workshop_pack.zip
+```
 
-**Exemple de contenu d'un pack :**
-* `0x67c863e8_base.png` ➔ ✅ **Requis :** Remplace la texture principale.
-* `0x67c863e8_height.png` ➔ ✅ **NOUVEAU / OPTIONNEL :** Active l'effet 3D POM (Relief).
-* `0x67c863e8_normal.png` ➔ ✅ **OPTIONNEL :** Remplace la normal map du jeu par la vôtre.
-* `0x67c863e8_ao.png` ➔ ✅ **OPTIONNEL :** Ajoute votre propre texture d'Occlusion Ambiante.
+### Texture Naming Convention
 
-> **Note :** Le jeu garde automatiquement les `_normal` et les `_pack` du jeu de base si vous n'en fournissez pas dans votre dossier !
+Textures in a pack are matched to the game by their filename. Use these suffixes to define the texture type:
 
----
+| Suffix | Type | Example |
+|---|---|---|
+| `_base`, `_diffuse`, `_albedo`, `_d`, `_color` | Base / Albedo | `road_base.png` |
+| `_normal`, `_n`, `_norm`, `_nrm` | Normal Map | `road_normal.png` |
+| `_height`, `_h`, `_disp`, `_parallax` | Height / POM | `road_height.png` |
+| `_ao`, `_occlusion`, `_occ` | Ambient Occlusion | `road_ao.png` |
+| `_pack`, `_packed`, `_orm`, `_mask` | Packed Map | `road_pack.png` |
 
-## 📥 Installation
+When a base texture is matched, the mod automatically looks for associated Normal, Height, and AO textures sharing the same prefix and applies them together.
 
-1. Téléchargez la dernière version dans l'onglet [Releases](https://github.com/Silv3r25/TexLoader-CXFR/releases).
-2. Extrayez le fichier `TexLoaderFix_CXFR.dll`.
-3. Placez-le dans le dossier `kino/mods/` de votre jeu.
-4. Démarrez le jeu !
+## Extensions
 
----
+### TexDownloader
 
-## 🎮 Contrôles
+> [GitHub](https://github.com/Silv3r25/TexDownloader)
 
-* `CTRL + P` : Ouvrir/Fermer le Menu
-* `SHIFT + 1` : Rechargement rapide des textures
+A companion extension that adds an in-game browser for downloading and installing texture packs directly from the community library. Press **Ctrl+T** to open.
 
----
-*Développé par l'équipe CarX France*
+- Browse packs organized by map
+- One-click download and auto-apply
+- Preview pack info (author, size, description)
+- Apply or delete installed packs from the UI
+- SHA-256 integrity verification on downloads
+
+#### Installation
+
+1. Download `TexDownloader_CXFR.kse` from [Releases](https://github.com/Silv3r25/TexDownloader/releases)
+2. Place it in `kino/extensions/`
+3. The **TEXDOWNLOADER** button will appear in the TexLoader menu
+
+## Creating Texture Packs
+
+Want to make your own packs? Two tools are available:
+
+### TexDumper CXFR
+
+> [GitHub](https://github.com/Silv3r25/TexDumper-CXFR)
+
+Extract all textures from any CarX map to use as reference or starting point.
+
+1. Load a map and press **Ctrl+P**
+2. Click **DUMP TEXTURES** — extracts all scene textures (MainTex, Normal, Height, Terrain layers, etc.)
+3. Textures are saved to `kino/mods/TexLoaderFix/Dumps/<MapName>/`
+4. Use the dumped filenames to create matching replacement textures
+
+### Scorpio CarX Texture Replacer
+
+> [GitHub](https://github.com/djekanovic/carx-texture-replacer)
+
+A desktop tool to automate texture replacement in existing packs. Input your source textures and hash IDs, and it batch-replaces files with correct naming conventions. Supports BaseColor, Normal, AO, and Height slots.
+
+### Pack Creation Workflow
+
+1. **Dump** the map textures with TexDumper
+2. **Create** your replacement textures (matching the dumped filenames + appropriate suffixes)
+3. **Test** by placing loose files in the map folder and reloading in-game
+4. **Package** by zipping your textures into a `.zip` file
+5. **Share** the `.zip` — other players drop it in their map folder and it appears in the pack list
+
+## Credits
+
+- **S!LVER** — TexLoader CXFR, TexDumper, TexDownloader
+- **djekanovic** — Scorpio CarX Texture Replacer
+- Community pack creators
